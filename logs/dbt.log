@@ -1,0 +1,43 @@
+[0m19:17:05.623136 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001DD048ABA10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001DD02654410>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001DD05423610>]}
+
+
+============================== 19:17:05.628186 | 144093d2-61cd-4bf5-81a4-a103556c8880 ==============================
+[0m19:17:05.628186 [info ] [MainThread]: Running with dbt=1.11.7
+[0m19:17:05.628825 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'None', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'profiles_dir': 'C:\\Users\\jschi\\.dbt', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'use_colors': 'True', 'indirect_selection': 'eager', 'invocation_command': 'dbt init demo_dag_pg', 'use_experimental_parser': 'False', 'log_path': 'logs'}
+[0m19:17:05.657770 [info ] [MainThread]: Creating dbt configuration folder at C:\Users\jschi\.dbt
+[0m19:17:05.660099 [debug] [MainThread]: Starter project path: C:\Users\jschi\AppData\Local\Programs\Python\Python313\Lib\site-packages\dbt\include\starter_project
+[0m19:17:05.691171 [info ] [MainThread]: 
+Your new dbt project "demo_dag_pg" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m19:17:05.691743 [info ] [MainThread]: Setting up your profile.
+[0m19:32:03.600073 [info ] [MainThread]: Profile demo_dag_pg written to C:\Users\jschi\.dbt\profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+[0m19:32:03.601471 [debug] [MainThread]: Command `dbt init` succeeded at 19:32:03.601293 after 898.12 seconds
+[0m19:32:03.602037 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001DD06D5CFC0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001DD06D516D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001DD0599BBD0>]}
+[0m19:32:03.602514 [debug] [MainThread]: Flushing usage events
+[0m19:32:03.816929 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m19:53:19.723870 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B1BB0FBA10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B1B8E94410>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B1BBC73610>]}
+
+
+============================== 19:53:19.728169 | 5704d179-1196-4273-9f94-e03a89271b1a ==============================
+[0m19:53:19.728169 [info ] [MainThread]: Running with dbt=1.11.7
+[0m19:53:19.728825 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'None', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'profiles_dir': 'C:\\Users\\jschi\\.dbt', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'indirect_selection': 'eager', 'invocation_command': 'dbt debug --config-dir', 'use_colors': 'True', 'use_experimental_parser': 'False', 'log_path': 'logs'}
+[0m19:53:19.749790 [info ] [MainThread]: To view your profiles.yml file, run:
+
+start C:\Users\jschi\.dbt
+[0m19:53:19.750749 [debug] [MainThread]: Command `dbt debug` succeeded at 19:53:19.750628 after 0.20 seconds
+[0m19:53:19.751145 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B1BD372C40>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B1BC27A570>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B1BC1EB790>]}
+[0m19:53:19.751504 [debug] [MainThread]: Flushing usage events
+[0m19:53:19.943198 [debug] [MainThread]: An error was encountered while trying to flush usage events

@@ -1,0 +1,41 @@
+version: 2
+
+models:
+# -------------------------
+# STAGING MODELS
+# -------------------------
+  - name: stg_orders
+    description: >
+      Staging model for raw order data. Cleans, renames, and standardizes
+      fields from the raw_orders table to prepare for downstream fact models.
+    columns:
+      - name: order_id
+        description: "Unique identifier for each order."
+        tests:
+          - not_null
+          - unique
+    
+      - name: customer_id
+        description: "Identifier for the customer placing the order."
+        tests:
+          - not_null
+
+      - name: order_date
+        description: "Date the order was placed."
+        tests:
+          - not_null
+
+      - name: order_amount
+        description: "Monetary amount of the order."
+        tests:
+          - not_null
+
+      - name: status
+        description: "Order lifecycle status."
+        tests:
+          - not_null
+
+      - name: updated_at
+        description: "Timestamp indicating when the order record was last updated."
+        tests:
+          - not_null

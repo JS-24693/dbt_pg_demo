@@ -1,0 +1,24 @@
+version: 2
+
+macros:
+  - name: dynamic_total_sales
+    description: >
+      A reusable macro that calculates total sales by summing a specified
+      numeric column from a given relation. Supports an optional `where_clause`
+      argument to filter the dataset before aggregation. This macro enables
+      flexible, parameterized metric creation across models.
+    arguments:
+      - name: source_relation
+        type: relation
+        description: >
+          The table or model to aggregate from. Typically passed using `ref()`
+          or `source()`.
+      - name: amount_column
+        type: string
+        description: >
+          The numeric column to sum in order to compute total sales.
+      - name: where_clause
+        type: string
+        description: >
+          Optional SQL filter applied before aggregation. If omitted, the macro
+          sums across the entire relation.

@@ -1,0 +1,41 @@
+version: 2
+
+models:
+
+  - name: dim_date
+    description: >
+      Canonical date dimension table generated using a daily date spine.
+      Provides a continuous sequence of dates along with standard calendar
+      attributes such as year, month, day, quarter, month name, and day name.
+      Supports consistent time-based filtering, grouping, and reporting across
+      all fact and mart models.
+    columns:
+      - name: date_day
+        description: "The calendar date represented by this row."
+        tests:
+          - not_null
+          - unique
+
+      - name: year
+        description: "Four-digit calendar year extracted from date_day."
+        tests:
+          - not_null
+
+      - name: month
+        description: "Numeric month (1–12) extracted from date_day."
+        tests:
+          - not_null
+
+      - name: day
+        description: "Day of month (1–31) extracted from date_day."
+        tests:
+          - not_null
+
+      - name: day_name
+        description: "Full name of the day of the week (e.g., Monday)."
+
+      - name: month_name
+        description: "Full name of the month (e.g., January)."
+
+      - name: quarter
+        description: "Calendar quarter (1–4) extracted from date_day."

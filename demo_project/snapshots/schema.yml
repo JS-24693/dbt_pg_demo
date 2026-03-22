@@ -1,0 +1,17 @@
+version: 2
+
+snapshots:
+  - name: dim_customers
+    description: >
+      Snapshot of customer records using the timestamp strategy to track
+      historical changes. A new version of a customer record is captured
+      whenever the `updated_at` field changes in the source table.
+    columns:
+      - name: customer_id
+        description: "Unique identifier for each customer; used as the snapshot key."
+      - name: customer_name
+        description: "Customer’s name as provided in the raw source."
+      - name: city
+        description: "Customer’s city of residence."
+      - name: updated_at
+        description: "Timestamp indicating when the customer record was last updated."

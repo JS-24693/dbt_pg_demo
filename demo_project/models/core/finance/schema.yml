@@ -1,0 +1,49 @@
+version: 2
+
+models:
+  - name: fact_orders
+    description: >
+      Incremental fact table at the order grain. This model loads only new
+      order records from `stg_orders` using `order_id` as the unique key.
+      It avoids full refreshes by selecting only rows with an `order_id`
+      greater than the maximum already loaded, keeping the table lean and
+      runtimes fast as data volume grows.
+    columns:
+      - name: order_id
+        description: "Primary key for the order. Unique identifier for each order."
+        tests:
+          - not_null
+          - unique
+
+      - name: order_date
+        description: "Date when the order was placed."
+        tests:
+          - not_null
+
+      - name: customer_id
+        description: "Identifier for the customer placing the order."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customers_current')
+                field: customer_id
+
+      - name: order_amount
+        description: "Monetary amount of the order."
+        tests:
+          - not_null
+      
+      - name: status
+        description: "Order lifecycle status (e.g., 'completed', 'pending')."
+        tests:
+          - not_null
+
+  - name: dim_customers_current
+    description: "Current version of each customer from the SCD snapshot."
+    columns:
+      - name: customer_id
+        description: "Primary key for the customer. Unique identifier for each customer."
+        tests:
+          - not_null
+          - unique

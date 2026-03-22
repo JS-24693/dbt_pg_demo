@@ -1,0 +1,81 @@
+version: 2
+
+models:
+# -------------------------
+# FACT MODELS (MARTS/FINANCE)
+# -------------------------
+# ---------------------------------------------------------
+# FACT: fct_total_sales
+# ---------------------------------------------------------
+ - name: fct_total_sales
+   description: >
+      Finance fact table that aggregates total sales across all orders.
+      Serves as the canonical source of truth for sales metrics used in
+      reporting and analysis. This model is derived from `stg_orders` and
+      provides a clean, business-ready metric for downstream reporting.
+   columns:
+      - name: total_sales
+        description: "Total aggregated sales amount."
+        tests:
+          - not_null
+
+      - name: order_id
+        description: "Unique identifier for each order included in the aggregation."
+
+      - name: order_amount
+        description: "Monetary amount of each order included in the aggregation."
+
+      - name: order_date
+        description: "Date the order was placed."
+
+      - name: customer_id
+        description: "Identifier for the customer placing the order."
+
+# ---------------------------------------------------------
+# REPORTING MODEL: rpt_total_sales_2024
+# ---------------------------------------------------------
+ - name: rpt_total_sales_2024
+   description: >
+      Reporting model that filters total sales to the 2024 calendar year.
+      Derived from `fct_total_sales` for year‑specific financial analysis.
+   columns:
+      - name: total_sales
+        description: "Total sales for the 2024 calendar year."
+        tests:
+          - not_null
+
+      - name: order_id
+        description: "Unique identifier for each order included in the 2024 slice."
+
+      - name: order_amount
+        description: "Monetary amount of each order included in the 2024 slice."
+
+      - name: order_date
+        description: "Order date, filtered to the 2024 calendar year."
+
+# -------------------------
+# REPORTING / SUBSET MODELS
+# (Not fact tables — filtered or time‑windowed views)
+# -------------------------
+
+# ---------------------------------------------------------
+# REPORTING MODEL: rpt_total_sales_jan_2024
+# ---------------------------------------------------------
+ - name: rpt_total_sales_jan_2024
+   description: >
+      Reporting model that filters total sales to January 2024.
+      Useful for month‑level financial insights and trend analysis.
+   columns:
+      - name: total_sales
+        description: "Total sales for January 2024."
+        tests:
+          - not_null
+
+      - name: order_id
+        description: "Unique identifier for each order included in the January 2024 slice."
+
+      - name: order_amount
+        description: "Monetary amount of each order included in the January 2024 slice."
+
+      - name: order_date
+        description: "Order date, filtered to January 2024."
