@@ -21,14 +21,25 @@ jobs:
       - name: Install dbt
         run: pip install dbt-postgres
 
+      - name: Create profiles.yml
+        run: |
+          mkdir -p ~/.dbt
+          cat > ~/.dbt/profiles.yml << 'EOF'
+          dev:
+            target: dev
+            outputs:
+              dev:
+                type: postgres
+                host: ${{ secrets.DBT_HOST }}
+                user: ${{ secrets.DBT_USER }}
+                password: ${{ secrets.DBT_PASSWORD }}
+                port: ${{ secrets.DBT_PORT }}
+                dbname: ${{ secrets.DBT_DBNAME }}
+                schema: public
+          EOF
+
       - name: Run dbt build
-        working-directory: .
-        env:
-          DBT_HOST: ${{ secrets.DBT_HOST }}
-          DBT_USER: ${{ secrets.DBT_USER }}
-          DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
-          DBT_PORT: ${{ secrets.DBT_PORT }}
-          DBT_DBNAME: ${{ secrets.DBT_DBNAME }}
+        working-directory: ./demo_project
         run: |
           dbt --version
           dbt debug || true   
@@ -40,5 +51,5 @@ jobs:
         with:
           name: dbt-artifacts
           path: |
-            logs/
-            target/
+            demo_project/logs/
+            demo_project/target/
