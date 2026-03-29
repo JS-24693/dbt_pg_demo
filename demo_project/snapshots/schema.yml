@@ -3,15 +3,38 @@ version: 2
 snapshots:
   - name: dim_customers
     description: >
-      Snapshot of customer records using the timestamp strategy to track
+      Slowly changing dimension (SCD) snapshot of customer records from stg_customers using the timestamp strategy to track
       historical changes. A new version of a customer record is captured
-      whenever the `updated_at` field changes in the source table.
+      whenever the `updated_at` field changes in the stg_customers table.
+    owner: "CRM Data Team"
+    owner_email: "crm-team@example.com"
+    domain: "customers"
+
     columns:
       - name: customer_id
         description: "Unique identifier for each customer; used as the snapshot key."
+        tests:
+          - not_null
+
       - name: customer_name
-        description: "Customer’s name as provided in the raw source."
+        description: "Current or historical name of customer as provided in the raw source."
+        tests:
+          - not_null
+
       - name: city
-        description: "Customer’s city of residence."
+        description: "City of residence for the customer."
+        tests:
+          - not_null
+
+      - name: dbt_valid_from
+        description: "Timestamp indicating when the customer record version became valid."
+        tests:
+          - not_null
+          
       - name: updated_at
         description: "Timestamp indicating when the customer record was last updated."
+    
+      - name: dbt_scd_id
+        description: "Unique internal dbt identifier for each version of a customer row."
+        tests:
+          - not_null

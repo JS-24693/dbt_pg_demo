@@ -8,6 +8,10 @@ models:
     description: >
       Staging model for raw order data. Cleans, renames, and standardizes
       fields from the raw_orders table to prepare for downstream fact models.
+    owner: "data_engineering_team"
+    owner_email: "data-engineering-team@example.com"
+    domain: "sales"
+
     columns:
       - name: order_id
         description: "Unique identifier for each order."
@@ -21,12 +25,12 @@ models:
           - not_null
 
       - name: order_date
-        description: "Date the order was placed."
+        description: "Order date from the source table. Date the order was placed."
         tests:
           - not_null
 
       - name: order_amount
-        description: "Monetary amount of the order."
+        description: "Order amount from the source table. Monetary amount of the order."
         tests:
           - not_null
 
@@ -38,4 +42,6 @@ models:
       - name: updated_at
         description: "Timestamp indicating when the order record was last updated."
         tests:
-          - not_null
+          - updated_at_validation:
+              column_name: updated_at
+

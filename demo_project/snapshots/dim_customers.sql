@@ -17,6 +17,6 @@ SELECT
     customer_name,
     city,
     updated_at
-FROM {{ source('raw', 'raw_customers') }}
+FROM {{ ref('stg_customers') }}
 
 {% endsnapshot %}

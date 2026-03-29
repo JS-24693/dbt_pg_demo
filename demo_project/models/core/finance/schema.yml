@@ -8,6 +8,11 @@ models:
       It avoids full refreshes by selecting only rows with an `order_id`
       greater than the maximum already loaded, keeping the table lean and
       runtimes fast as data volume grows.
+
+    owner: "data_analyst_team"
+    owner_email: "data-team@example.com"
+    domain: "finance"
+      
     columns:
       - name: order_id
         description: "Primary key for the order. Unique identifier for each order."
@@ -33,6 +38,7 @@ models:
         description: "Monetary amount of the order."
         tests:
           - not_null
+          - no_invalid_order_amounts
       
       - name: status
         description: "Order lifecycle status (e.g., 'completed', 'pending')."
