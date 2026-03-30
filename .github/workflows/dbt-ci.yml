@@ -26,19 +26,19 @@ jobs:
       - name: Create profiles.yml
         run: |
           mkdir -p ~/.dbt
-          printf "%s\n" \
-"dev:" \
-"  target: dev" \
-"  outputs:" \
-"    dev:" \
-"      type: postgres" \
-"      host: ${DBT_HOST}" \
-"      user: ${DBT_USER}" \
-"      password: ${DBT_PASSWORD}" \
-"      port: ${DBT_PORT}" \
-"      dbname: ${DBT_DBNAME}" \
-"      schema: public" \
-          > ~/.dbt/profiles.yml
+          cat <<EOF > ~/.dbt/profiles.yml
+dev:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: ${DBT_HOST}
+      user: ${DBT_USER}
+      password: ${DBT_PASSWORD}
+      port: ${DBT_PORT}
+      dbname: ${DBT_DBNAME}
+      schema: public
+EOF
         env:
           DBT_HOST: ${{ secrets.DBT_HOST }}
           DBT_USER: ${{ secrets.DBT_USER }}
