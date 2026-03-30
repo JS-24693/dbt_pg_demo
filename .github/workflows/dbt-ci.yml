@@ -48,11 +48,10 @@ jobs:
           DBT_DBNAME: ${{ secrets.DBT_DBNAME }}
 
       - name: Run dbt build
-        working-directory: ./demo_project
         run: |
           dbt --version
-          dbt debug || true
-          dbt build
+          dbt debug --project-dir ./demo_project || true
+          dbt build --project-dir ./demo_project
 
       - name: Upload dbt artifacts
         if: always()
