@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    
+
 jobs:
   dbt-build:
     runs-on: ubuntu-latest
@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          submodules: false   # Prevent submodule issues
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -30,22 +32,28 @@ jobs:
             outputs:
               dev:
                 type: postgres
-                host: ${{ secrets.DBT_HOST }}
-                user: ${{ secrets.DBT_USER }}
-                password: ${{ secrets.DBT_PASSWORD }}
-                port: ${{ secrets.DBT_PORT }}
-                dbname: ${{ secrets.DBT_DBNAME }}
+                host: ${DBT_HOST}
+                user: ${DBT_USER}
+                password: ${DBT_PASSWORD}
+                port: ${DBT_PORT}
+                dbname: ${DBT_DBNAME}
                 schema: public
           EOF
+        env:
+          DBT_HOST: ${{ secrets.DBT_HOST }}
+          DBT_USER: ${{ secrets.DBT_USER }}
+          DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
+          DBT_PORT: ${{ secrets.DBT_PORT }}
+          DBT_DBNAME: ${{ secrets.DBT_DBNAME }}
 
       - name: Run dbt build
         working-directory: ./demo_project
         run: |
           dbt --version
-          dbt debug || true   
-          dbt build 
-      
-      - name: Upload dbt artifacts (logs + target)
+          dbt debug || true
+          dbt build
+
+      - name: Upload dbt artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
