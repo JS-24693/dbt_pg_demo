@@ -13,7 +13,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          submodules: false   # Prevent submodule issues
+          submodules: false
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -49,8 +49,8 @@ jobs:
       - name: Run dbt build
         run: |
           dbt --version
-          dbt debug --project-dir ./dbt_pg_demo/demo_project || true
-          dbt build --project-dir ./dbt_pg_demo/demo_project
+          dbt debug --project-dir dbt_pg_demo/demo_project || true
+          dbt build --project-dir dbt_pg_demo/demo_project
 
       - name: Upload dbt artifacts
         if: always()
