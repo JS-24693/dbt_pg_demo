@@ -4,6 +4,7 @@ demo_project/dbt-env/
 demo_project/dbt-env-311/
 Users/
 logs/
+dbt_debug_log.json
 __pycache__/
 *.pyc
 .env
