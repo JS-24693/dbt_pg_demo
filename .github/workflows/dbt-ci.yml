@@ -19,7 +19,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install dbt-postgres
-        run: pip install dbt-postgres==1.11.7
+        run: pip install "dbt-postgres>=1.11,<1.12"
 
       - name: Create dbt profiles directory
         run: mkdir -p ~/.dbt
