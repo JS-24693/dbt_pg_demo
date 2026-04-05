@@ -1,32 +1,33 @@
 version: 2
 
 snapshots:
-  dim_customers:
-    description: >
-      Slowly changing dimension (SCD) snapshot of customer records from stg_customers using the timestamp strategy.
-    owner: "CRM Data Team"
-    owner_email: "crm-team@example.com"
-    domain: "customers"
-    columns:
-      - name: customer_id
-        description: "Unique identifier for each customer; used as the snapshot key."
-        tests:
-          - not_null
-      - name: customer_name
-        description: "Current or historical name of customer."
-        tests:
-          - not_null
-      - name: city
-        description: "City of residence."
-        tests:
-          - not_null
-      - name: dbt_valid_from
-        description: "Timestamp when the record version became valid."
-        tests:
-          - not_null
-      - name: updated_at
-        description: "Timestamp when the record was last updated."
-      - name: dbt_scd_id
-        description: "Unique internal dbt identifier for each version."
-        tests:
-          - not_null
+  demo_project:
+    dim_customers:
+      description: >
+        Slowly changing dimension (SCD) snapshot of customer records from stg_customers using the timestamp strategy.
+      owner: "CRM Data Team"
+      owner_email: "crm-team@example.com"
+      domain: "customers"
+      columns:
+        - name: customer_id
+          description: "Unique identifier for each customer; used as the snapshot key."
+          tests:
+            - not_null
+        - name: customer_name
+          description: "Current or historical name of customer."
+          tests:
+            - not_null
+        - name: city
+          description: "City of residence."
+          tests:
+            - not_null
+        - name: dbt_valid_from
+          description: "Timestamp when the record version became valid."
+          tests:
+            - not_null
+        - name: updated_at
+          description: "Timestamp when the record was last updated."
+        - name: dbt_scd_id
+          description: "Unique internal dbt identifier for each version."
+          tests:
+            - not_null
