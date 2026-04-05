@@ -1,0 +1,20 @@
+name: debug paths
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Print directory tree (absolute path)
+        run: |
+          echo "=== RUNNER WORKSPACE ==="
+          echo ${{ github.workspace }}
+          echo "=== LISTING WORKSPACE ROOT ==="
+          ls -R ${{ github.workspace }}
