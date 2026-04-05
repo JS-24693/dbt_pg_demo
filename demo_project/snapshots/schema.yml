@@ -2,9 +2,10 @@ version: 2
 
 snapshots:
   demo_project:
-    dim_customers:
+    - name: dim_customers
       description: >
-        Slowly changing dimension (SCD) snapshot of customer records from stg_customers using the timestamp strategy.
+        Slowly changing dimension (SCD) snapshot of customer records
+        from stg_customers using the timestamp strategy.
       owner: "CRM Data Team"
       owner_email: "crm-team@example.com"
       domain: "customers"
