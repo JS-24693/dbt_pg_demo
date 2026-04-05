@@ -1,4 +1,4 @@
-name: debug paths
+name: debug
 
 on:
   workflow_dispatch:
