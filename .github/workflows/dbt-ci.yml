@@ -20,10 +20,9 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          persist-credentials: false
           clean: true
 
-      # Use Node 24-compatible versions of actions
+      # Set up Python (Node‑24 compatible)
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -57,7 +56,7 @@ jobs:
           DBT_PORT: ${{ secrets.DBT_PORT }}
           DBT_DBNAME: ${{ secrets.DBT_DBNAME }}
 
-      # Run dbt commands
+      # Run dbt
       - name: Run dbt build
         run: |
           dbt --version
@@ -65,7 +64,7 @@ jobs:
           dbt seed
           dbt build
 
-      # Upload artifacts (logs + target)
+      # Upload artifacts
       - name: Upload dbt artifacts
         if: always()
         uses: actions/upload-artifact@v4
