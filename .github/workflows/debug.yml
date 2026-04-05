@@ -1,0 +1,21 @@
+name: debug
+
+on:
+  workflow_dispatch:
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Print workspace path
+        run: echo "WORKSPACE = ${{ github.workspace }}"
+
+      - name: Print directory tree
+        run: |
+          echo "=== TREE START ==="
+          ls -R "${{ github.workspace }}"
+          echo "=== TREE END ==="
