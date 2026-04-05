@@ -18,8 +18,10 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install dbt-postgres
-        run: pip install "dbt-postgres>=1.11,<1.12"
+      - name: Install dbt-core + Postgres dependencies
+        run: |
+          pip install "dbt-core>=1.11,<1.12"
+          pip install psycopg2-binary
 
       - name: Create dbt profiles directory
         run: mkdir -p ~/.dbt
