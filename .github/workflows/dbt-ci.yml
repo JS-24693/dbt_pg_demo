@@ -5,46 +5,50 @@ on:
     branches: [main]
   pull_request:
 
+# Set working directory ONCE for all run steps
+defaults:
+  run:
+    working-directory: dbt_pg_demo/demo_project
+
 jobs:
   dbt-build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Ensure working directory is repo root
-        run: cd ${{ github.workspace }}
-
+      # Checkout repo
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          ref: main
           persist-credentials: false
           clean: true
-          submodules: false
 
+      # Use Node 24-compatible versions of actions
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
-      - name: Install dbt
+      # Install dbt
+      - name: Install dbt-postgres
         run: pip install dbt-postgres
 
+      # Create profiles.yml
       - name: Create profiles.yml
         run: |
           mkdir -p ~/.dbt
-          cat <<EOF | sed 's/^ *//' > ~/.dbt/profiles.yml
-            dev:
-              target: dev
-              outputs:
-                dev:
-                  type: postgres
-                  host: ${DBT_HOST}
-                  user: ${DBT_USER}
-                  password: ${DBT_PASSWORD}
-                  port: ${DBT_PORT}
-                  dbname: ${DBT_DBNAME}
-                  schema: public
+          cat <<EOF > ~/.dbt/profiles.yml
+          demo_project:
+            target: dev
+            outputs:
+              dev:
+                type: postgres
+                host: $DBT_HOST
+                user: $DBT_USER
+                password: $DBT_PASSWORD
+                port: $DBT_PORT
+                dbname: $DBT_DBNAME
+                schema: public
           EOF
         env:
           DBT_HOST: ${{ secrets.DBT_HOST }}
@@ -53,19 +57,20 @@ jobs:
           DBT_PORT: ${{ secrets.DBT_PORT }}
           DBT_DBNAME: ${{ secrets.DBT_DBNAME }}
 
+      # Run dbt commands
       - name: Run dbt build
-        working-directory: ${{ github.workspace }}
         run: |
           dbt --version
-          dbt debug --project-dir ${{ github.workspace }}/dbt_pg_demo/demo_project || true
-          dbt seed --project-dir ${{ github.workspace }}/dbt_pg_demo/demo_project
-          dbt build --project-dir ${{ github.workspace }}/dbt_pg_demo/demo_project
-          
+          dbt debug
+          dbt seed
+          dbt build
+
+      # Upload artifacts (logs + target)
       - name: Upload dbt artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: dbt-artifacts
           path: |
-            dbt_pg_demo/demo_project/logs/
-            dbt_pg_demo/demo_project/target/
+            logs/
+            target/
