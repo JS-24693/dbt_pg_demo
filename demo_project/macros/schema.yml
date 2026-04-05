@@ -1,19 +1,20 @@
 version: 2
 
 macros:
-  dynamic_total_sales:
-    description: >
-      A reusable macro that calculates total sales by summing a specified numeric column.
-    arguments:
-      - name: source_relation
-        type: relation
-        description: >
-          The table or model to aggregate from.
-      - name: amount_column
-        type: string
-        description: >
-          The numeric column to sum.
-      - name: where_clause
-        type: string
-        description: >
-          Optional SQL filter applied before aggregation.
+  demo_project:
+    dynamic_total_sales:
+      description: >
+        A reusable macro that calculates total sales by summing a specified numeric column.
+      arguments:
+        - name: source_relation
+          type: relation
+          description: >
+            The table or model to aggregate from.
+        - name: amount_column
+          type: string
+          description: >
+            The numeric column to sum.
+        - name: where_clause
+          type: string
+          description: >
+            Optional SQL filter applied before aggregation.
