@@ -1,5 +1,4 @@
 version: 2
-
 seeds:
   - name: raw_customers
     config:
