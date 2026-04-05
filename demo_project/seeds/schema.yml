@@ -1,12 +1,86 @@
 version: 2
 
 seeds:
-  - name: raw_customers
-  - name: raw_orders
-  - name: sales_data
-  - name: sales_flat
-  - name: dim_customer_seed
-  - name: dim_customers_seed
-  - name: dim_date_seed
-  - name: dim_product_seed
-  - name: fact_sales
+  demo_project:
+
+    raw_customers:
+      column_types:
+        customer_id: integer
+        customer_name: string
+        city: string
+        updated_at: "timestamp without time zone"
+
+    raw_orders:
+      column_types:
+        order_id: integer
+        order_date: date
+        customer_id: integer
+        order_amount: "numeric(10,2)"
+        status: string
+        updated_at: "timestamp without time zone"
+
+    sales_data:
+      column_types:
+        order_id: integer
+        product_name: string
+        category: string
+        quantity: integer
+        unit_price: "numeric(10,2)"
+        order_date: date
+
+    sales_flat:
+      column_types:
+        sales_id: integer
+        units_sold: integer
+        total_amount: "numeric(10,2)"
+        date_key: date
+        year: integer
+        month: integer
+        product_name: string
+        category: string
+        sub_category: string
+        customer_name: string
+        region: string
+        city: string
+
+    dim_customer_seed:
+      column_types:
+        customer_key: integer
+        customer_name: string
+        region: string
+        city: string
+
+    dim_customers_seed:
+      column_types:
+        customer_id: integer
+        customer_name: string
+        city: string
+        updated_at: "timestamp without time zone"
+        dbt_scd_id: text
+        dbt_updated_at: "timestamp without time zone"
+        dbt_valid_from: "timestamp without time zone"
+        dbt_valid_to: "timestamp without time zone"
+
+    dim_date_seed:
+      column_types:
+        date_key: date
+        year: integer
+        month: integer
+        day: integer
+        weekday: string
+
+    dim_product_seed:
+      column_types:
+        product_key: integer
+        product_name: string
+        category: string
+        brand: string
+
+    fact_sales:
+      column_types:
+        sales_id: integer
+        date_key: date
+        product_key: integer
+        customer_key: integer
+        units_sold: integer
+        total_amount: "numeric(10,2)"

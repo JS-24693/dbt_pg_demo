@@ -1,3 +1,4 @@
+sales_id,date_key,product_key,customer_key,units_sold,total_amount
 1,2025-01-01,1,1,3,240.00
 2,2025-01-01,2,2,1,35.00
 3,2025-01-02,3,3,2,1500.00

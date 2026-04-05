@@ -1,3 +1,4 @@
+sales_id,units_sold,total_amount,date_key,year,month,product_name,category,subcategory,customer_name,region,city
 1,3,240.00,2025-01-01,2025,1,Running Shoes,Footwear,Sports,Alice Johnson,East,New York
 2,1,35.00,2025-01-01,2025,1,Casual Shirt,Apparel,Men,Bob Smith,West,San Francisco
 3,2,1500.00,2025-01-02,2025,1,LED TV,Electronics,Home Entertainment,Catherine Lee,North,Chicago
