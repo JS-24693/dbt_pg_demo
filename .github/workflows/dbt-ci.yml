@@ -44,13 +44,10 @@ jobs:
                 sslmode: require
           EOF
 
-      - name: Change to dbt project directory
-        run: cd dbt_pg_demo/demo_project
-
       - name: Debug connection
-        working-directory: dbt_pg_demo/demo_project
+        working-directory: demo_project
         run: dbt debug
 
       - name: Run dbt build
-        working-directory: dbt_pg_demo/demo_project
+        working-directory: demo_project
         run: dbt build
