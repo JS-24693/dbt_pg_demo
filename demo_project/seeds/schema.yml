@@ -5,8 +5,8 @@ seeds:
   - name: raw_orders
   - name: sales_data
   - name: sales_flat
-  - name: dim_customer
+  - name: dim_customer_seed
   - name: dim_customers_seed
   - name: dim_date_seed
-  - name: dim_product
+  - name: dim_product_seed
   - name: fact_sales
