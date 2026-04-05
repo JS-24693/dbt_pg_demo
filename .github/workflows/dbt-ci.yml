@@ -19,6 +19,12 @@ jobs:
         with:
           fetch-depth: 0
           clean: true
+      - name: Print directory tree
+        run: |
+          echo "=== RUNNER WORKSPACE ==="
+          pwd
+          echo "=== LISTING ROOT ==="
+          ls -R .
 
       - name: Set up Python
         uses: actions/setup-python@v5
