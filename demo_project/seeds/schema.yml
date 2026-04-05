@@ -6,7 +6,7 @@ seeds:
   - name: sales_data
   - name: sales_flat
   - name: dim_customer
-  - name: dim_customers
+  - name: dim_customers_seed
   - name: dim_date_seed
   - name: dim_product
   - name: fact_sales
