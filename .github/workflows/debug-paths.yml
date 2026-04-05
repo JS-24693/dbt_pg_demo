@@ -15,6 +15,6 @@ jobs:
       - name: Print directory tree (absolute path)
         run: |
           echo "=== RUNNER WORKSPACE ==="
-          echo ${{ github.workspace }}
+          echo "${{ github.workspace }}"
           echo "=== LISTING WORKSPACE ROOT ==="
-          ls -R ${{ github.workspace }}
+          ls -R "${{ github.workspace }}"
