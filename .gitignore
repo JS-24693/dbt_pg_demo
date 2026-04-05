@@ -1,4 +1,7 @@
 dbt-env/
+dbt-env-311/
+demo_project/dbt-env/
+demo_project/dbt-env-311/
 logs/
 __pycache__/
 *.pyc
