@@ -18,10 +18,10 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install dbt-core + Postgres dependencies
+      - name: Install dbt-core + Postgres adapter
         run: |
-          pip install "dbt-core>=1.11,<1.12"
-          pip install psycopg2-binary
+          pip install "dbt-core==1.11.7"
+          pip install "dbt-postgres==1.10.0"
 
       - name: Create dbt profiles directory
         run: mkdir -p ~/.dbt
@@ -44,8 +44,13 @@ jobs:
                 sslmode: require
           EOF
 
+      - name: Change to dbt project directory
+        run: cd dbt_pg_demo/demo_project
+
       - name: Debug connection
+        working-directory: dbt_pg_demo/demo_project
         run: dbt debug
 
       - name: Run dbt build
+        working-directory: dbt_pg_demo/demo_project
         run: dbt build
