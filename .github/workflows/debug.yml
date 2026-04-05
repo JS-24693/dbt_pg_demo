@@ -17,4 +17,4 @@ jobs:
         run: |
           echo "=== TREE START ==="
           ls -R "${{ github.workspace }}"
-          echo "=== TREE END ==="
+          echo "=== TREE END ==="# refresh
