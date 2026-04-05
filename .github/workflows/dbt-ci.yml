@@ -20,12 +20,12 @@ jobs:
           fetch-depth: 0
           clean: true
 
-      - name: Print directory tree
+      - name: Print directory tree (absolute path)
         run: |
           echo "=== RUNNER WORKSPACE ==="
-          pwd
-          echo "=== LISTING ROOT ==="
-          ls -R .
+          echo "${{ github.workspace }}"
+          echo "=== LISTING WORKSPACE ROOT ==="
+          ls -R ${{ github.workspace }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
