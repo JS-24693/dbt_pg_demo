@@ -4,8 +4,8 @@ seeds:
     config:
       column_types:
         customer_id: integer
-        customer_name: string
-        city: string
+        customer_name: text
+        city: text
         updated_at: "timestamp without time zone"
 
   - name: raw_orders
@@ -15,15 +15,15 @@ seeds:
         order_date: date
         customer_id: integer
         order_amount: "numeric(10,2)"
-        status: string
+        status: text
         updated_at: "timestamp without time zone"
 
   - name: sales_data
     config:
       column_types:
         order_id: integer
-        product_name: string
-        category: string
+        product_name: text
+        category: text
         quantity: integer
         unit_price: "numeric(10,2)"
         order_date: date
@@ -37,27 +37,27 @@ seeds:
         date_key: date
         year: integer
         month: integer
-        product_name: string
-        category: string
-        sub_category: string
-        customer_name: string
-        region: string
-        city: string
+        product_name: text
+        category: text
+        sub_category: text
+        customer_name: text
+        region: text
+        city: text
 
   - name: dim_customer_seed
     config:
       column_types:
         customer_key: integer
-        customer_name: string
-        region: string
-        city: string
+        customer_name: text
+        region: text
+        city: text
 
   - name: dim_customers_seed
     config:
       column_types:
         customer_id: integer
-        customer_name: string
-        city: string
+        customer_name: text
+        city: text
         updated_at: "timestamp without time zone"
         dbt_scd_id: text
         dbt_updated_at: "timestamp without time zone"
@@ -71,15 +71,15 @@ seeds:
         year: integer
         month: integer
         day: integer
-        weekday: string
+        weekday: text
 
   - name: dim_product_seed
     config:
       column_types:
         product_key: integer
-        product_name: string
-        category: string
-        brand: string
+        product_name: text
+        category: text
+        brand: text
 
   - name: fact_sales
     config:
