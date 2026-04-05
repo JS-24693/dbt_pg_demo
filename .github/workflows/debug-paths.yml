@@ -1,8 +1,7 @@
 name: debug paths
 
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
 
 jobs:
   debug:
@@ -12,9 +11,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Print directory tree (absolute path)
+      - name: Print workspace path
+        run: echo "WORKSPACE = ${{ github.workspace }}"
+
+      - name: Print directory tree
         run: |
-          echo "=== RUNNER WORKSPACE ==="
-          echo "${{ github.workspace }}"
-          echo "=== LISTING WORKSPACE ROOT ==="
+          echo "=== TREE START ==="
           ls -R "${{ github.workspace }}"
+          echo "=== TREE END ==="
