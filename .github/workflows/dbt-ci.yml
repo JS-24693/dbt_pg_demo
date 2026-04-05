@@ -2,64 +2,48 @@ name: dbt CI
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   pull_request:
 
 jobs:
-  dbt-build:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          clean: true
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: "3.12"
 
       - name: Install dbt-postgres
-        run: pip install dbt-postgres
+        run: pip install dbt-postgres==1.11.7
 
-      - name: Create profiles.yml
+      - name: Create dbt profiles directory
+        run: mkdir -p ~/.dbt
+
+      - name: Write profiles.yml
         run: |
-          mkdir -p ~/.dbt
           cat <<EOF > ~/.dbt/profiles.yml
           demo_project:
-            target: dev
+            target: ci
             outputs:
-              dev:
+              ci:
                 type: postgres
-                host: $DBT_HOST
-                user: $DBT_USER
-                password: $DBT_PASSWORD
-                port: $DBT_PORT
-                dbname: $DBT_DBNAME
-                schema: public
+                host: "${{ secrets.DBT_HOST }}"
+                user: "${{ secrets.DBT_USER }}"
+                password: "${{ secrets.DBT_PASSWORD }}"
+                port: ${{ secrets.DBT_PORT }}
+                dbname: "${{ secrets.DBT_DBNAME }}"
+                schema: demo_project
+                threads: 4
+                sslmode: require
           EOF
-        env:
-          DBT_HOST: ${{ secrets.DBT_HOST }}
-          DBT_USER: ${{ secrets.DBT_USER }}
-          DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
-          DBT_PORT: ${{ secrets.DBT_PORT }}
-          DBT_DBNAME: ${{ secrets.DBT_DBNAME }}
+
+      - name: Debug connection
+        run: dbt debug
 
       - name: Run dbt build
-        working-directory: ${{ github.workspace }}/demo_project
-        run: |
-          dbt --version
-          dbt debug
-          dbt seed
-          dbt build
-
-      - name: Upload dbt artifacts
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: dbt-artifacts
-          path: |
-            demo_project/logs/
-            demo_project/target/
+        run: dbt build
