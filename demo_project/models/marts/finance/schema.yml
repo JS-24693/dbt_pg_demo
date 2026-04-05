@@ -7,13 +7,13 @@ models:
 # ---------------------------------------------------------
 # FACT: fct_total_sales
 # ---------------------------------------------------------
- - name: fct_total_sales
-   description: >
+  - name: fct_total_sales
+    description: >
       Finance fact table that aggregates total sales across all orders.
       Serves as the canonical source of truth for sales metrics used in
       reporting and analysis. This model is derived from `stg_orders` and
       provides a clean, business-ready metric for downstream reporting.
-   columns:
+    columns:
       - name: total_sales
         description: "Total aggregated sales amount."
         tests:
@@ -34,11 +34,11 @@ models:
 # ---------------------------------------------------------
 # REPORTING MODEL: rpt_total_sales_2024
 # ---------------------------------------------------------
- - name: rpt_total_sales_2024
-   description: >
+  - name: rpt_total_sales_2024
+    description: >
       Reporting model that filters total sales to the 2024 calendar year.
       Derived from `fct_total_sales` for year‑specific financial analysis.
-   columns:
+    columns:
       - name: total_sales
         description: "Total sales for the 2024 calendar year."
         tests:
@@ -61,11 +61,11 @@ models:
 # ---------------------------------------------------------
 # REPORTING MODEL: rpt_total_sales_jan_2024
 # ---------------------------------------------------------
- - name: rpt_total_sales_jan_2024
-   description: >
+  - name: rpt_total_sales_jan_2024
+    description: >
       Reporting model that filters total sales to January 2024.
       Useful for month‑level financial insights and trend analysis.
-   columns:
+    columns:
       - name: total_sales
         description: "Total sales for January 2024."
         tests:
