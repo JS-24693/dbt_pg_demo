@@ -5,34 +5,29 @@ on:
     branches: [main]
   pull_request:
 
-# Set working directory ONCE for all run steps
 defaults:
   run:
-    working-directory: dbt_pg_demo/demo_project
+    working-directory: dbt-projects/dbt_pg_demo/demo_project
 
 jobs:
   dbt-build:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout repo
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           clean: true
 
-      # Set up Python (Node‑24 compatible)
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
-      # Install dbt
       - name: Install dbt-postgres
         run: pip install dbt-postgres
 
-      # Create profiles.yml
       - name: Create profiles.yml
         run: |
           mkdir -p ~/.dbt
@@ -56,7 +51,6 @@ jobs:
           DBT_PORT: ${{ secrets.DBT_PORT }}
           DBT_DBNAME: ${{ secrets.DBT_DBNAME }}
 
-      # Run dbt
       - name: Run dbt build
         run: |
           dbt --version
@@ -64,7 +58,6 @@ jobs:
           dbt seed
           dbt build
 
-      # Upload artifacts
       - name: Upload dbt artifacts
         if: always()
         uses: actions/upload-artifact@v4
